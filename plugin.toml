@@ -1,0 +1,12 @@
+[plugin]
+id = "adi.lang.swift"
+name = "Swift Language Support"
+version = "0.1.0"
+api_version = 2
+
+[language]
+id = "swift"
+extensions = ["swift"]
+
+[provides]
+services = ["adi.indexer.lang.swift"]
