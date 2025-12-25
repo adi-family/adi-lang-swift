@@ -272,16 +272,24 @@ fn parse_swift_init(node: Node, source: &str) -> Option<ParsedSymbolAbi> {
     let signature = extract_function_signature(node, source);
 
     Some(
-        ParsedSymbolAbi::new("init".to_string(), SymbolKindAbi::Constructor, node_location(node))
-            .with_signature(signature)
-            .with_visibility(visibility)
-            .with_doc_comment_opt(doc_comment),
+        ParsedSymbolAbi::new(
+            "init".to_string(),
+            SymbolKindAbi::Constructor,
+            node_location(node),
+        )
+        .with_signature(signature)
+        .with_visibility(visibility)
+        .with_doc_comment_opt(doc_comment),
     )
 }
 
 fn parse_swift_deinit(node: Node) -> ParsedSymbolAbi {
-    ParsedSymbolAbi::new("deinit".to_string(), SymbolKindAbi::Destructor, node_location(node))
-        .with_visibility(VisibilityAbi::Internal)
+    ParsedSymbolAbi::new(
+        "deinit".to_string(),
+        SymbolKindAbi::Destructor,
+        node_location(node),
+    )
+    .with_visibility(VisibilityAbi::Internal)
 }
 
 fn parse_swift_typealias(node: Node, source: &str) -> Option<ParsedSymbolAbi> {
@@ -399,19 +407,44 @@ fn extract_call_name(node: Node, source: &str) -> String {
 fn is_primitive_type(name: &str) -> bool {
     matches!(
         name,
-        "Int" | "Int8" | "Int16" | "Int32" | "Int64"
-            | "UInt" | "UInt8" | "UInt16" | "UInt32" | "UInt64"
-            | "Float" | "Double" | "Bool" | "String" | "Character"
-            | "Void" | "Never" | "Any" | "AnyObject" | "Self"
-            | "Optional" | "Array" | "Dictionary" | "Set"
+        "Int"
+            | "Int8"
+            | "Int16"
+            | "Int32"
+            | "Int64"
+            | "UInt"
+            | "UInt8"
+            | "UInt16"
+            | "UInt32"
+            | "UInt64"
+            | "Float"
+            | "Double"
+            | "Bool"
+            | "String"
+            | "Character"
+            | "Void"
+            | "Never"
+            | "Any"
+            | "AnyObject"
+            | "Self"
+            | "Optional"
+            | "Array"
+            | "Dictionary"
+            | "Set"
     )
 }
 
 fn is_common_function(name: &str) -> bool {
     matches!(
         name,
-        "print" | "debugPrint" | "dump" | "fatalError" | "precondition" | "preconditionFailure"
-            | "assert" | "assertionFailure"
+        "print"
+            | "debugPrint"
+            | "dump"
+            | "fatalError"
+            | "precondition"
+            | "preconditionFailure"
+            | "assert"
+            | "assertionFailure"
     )
 }
 
